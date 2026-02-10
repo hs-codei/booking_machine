@@ -1,23 +1,27 @@
 ---
 import { siteConfig } from '../../site.config';
 
-interface Props {
-  height?: string;
-}
-
-const { height = '700px' } = Astro.props;
+const calendlyEmbedUrl = `${siteConfig.calendlyUrl}?hide_gdpr_banner=1&background_color=fafaf7&primary_color=2B5F4E`;
 ---
 
 <div class="calendly-embed">
-  <div class="calendly-inline-widget" data-url={siteConfig.calendlyUrl} style={`min-height: ${height};`}></div>
+  <!-- Calendly inline widget -->
+  <div
+    class="calendly-inline-widget"
+    data-url={calendlyEmbedUrl}
+    style="min-width:320px;height:1200px;"
+  ></div>
+
+  <!-- Calendly script -->
+  <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <div class="calendly-fallback">
     <p>
-      Falls das Buchungsformular nicht angezeigt wird, können Sie uns auch direkt erreichen:
+      Falls das Buchungsformular nicht lädt:
     </p>
     <div class="calendly-fallback-actions">
       <a href={siteConfig.calendlyUrl} target="_blank" rel="noopener" class="btn btn-primary">
-        Termin auf Calendly buchen
+        Direkt auf Calendly buchen
       </a>
       <a href={`tel:${siteConfig.phoneTel}`} class="btn btn-secondary">
         {siteConfig.phone}
@@ -26,16 +30,20 @@ const { height = '700px' } = Astro.props;
   </div>
 </div>
 
-<!-- Calendly Script -->
-<script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
 <style>
   .calendly-embed {
     position: relative;
+    width: 100%;
   }
 
   .calendly-inline-widget {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .calendly-inline-widget {
+      height: 1400px !important;
+    }
   }
 
   .calendly-fallback {
@@ -56,10 +64,5 @@ const { height = '700px' } = Astro.props;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  /* Hide fallback when Calendly loads */
-  .calendly-inline-widget:not(:empty) + .calendly-fallback {
-    display: none;
   }
 </style>

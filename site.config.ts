@@ -30,7 +30,7 @@ export const siteConfig = {
 
   // External service URLs
   siteUrl: "https://www.praxis-bewegungszeit.de",
-  calendlyUrl: "https://calendly.com/praxis-bewegungszeit",
+  calendlyUrl: "https://calendly.com/heinrichsommeil/30min",
   formspreeId: "xabcdefg", // Replace with actual Formspree form ID
   googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.2!2d13.3197!3d52.5065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDMwJzIzLjQiTiAxM8KwMTknMTAuOSJF!5e0!3m2!1sde!2sde!4v1234567890",
   googlePlaceId: "", // For reviews link
