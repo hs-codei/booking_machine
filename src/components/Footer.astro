@@ -1,0 +1,87 @@
+---
+import { siteConfig } from '../../site.config';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-name">{siteConfig.name}</div>
+        <p>
+          {siteConfig.tagline}<br>
+          {siteConfig.address.street} · {siteConfig.address.postal} {siteConfig.address.city}
+        </p>
+      </div>
+      <nav class="footer-links">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="/kontakt">Kontakt</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      © {currentYear} {siteConfig.name}. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-text);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 2.5rem 0 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-white);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.25rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-links {
+      justify-content: center;
+    }
+  }
+</style>

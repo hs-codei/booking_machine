@@ -1,0 +1,268 @@
+---
+import { siteConfig } from '../../site.config';
+
+interface Props {
+  standalone?: boolean;
+}
+
+const { standalone = false } = Astro.props;
+---
+
+<section class={`contact section section--dark ${standalone ? 'contact--standalone' : ''}`} id="kontakt">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info animate-on-scroll">
+        <div class="section-label text-accent">Kontakt</div>
+        <h2>Jetzt Termin vereinbaren</h2>
+        <p>
+          Rufen Sie uns an oder schreiben Sie uns. Wir melden uns in der Regel noch am selben Tag bei Ihnen zurück.
+        </p>
+
+        <div class="contact-details">
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.1.31.03.66-.25 1.02l-2.2 2.2z"/></svg>
+            <div class="contact-detail-text">
+              <strong>Telefon</strong>
+              <a href={`tel:${siteConfig.phoneTel}`}>{siteConfig.phone}</a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <div class="contact-detail-text">
+              <strong>E-Mail</strong>
+              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+            <div class="contact-detail-text">
+              <strong>Adresse</strong>
+              <span>{siteConfig.address.street}, {siteConfig.address.postal} {siteConfig.address.city}-{siteConfig.address.district}</span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+            <div class="contact-detail-text">
+              <strong>Öffnungszeiten</strong>
+              <span>{siteConfig.hours}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form
+        class="contact-form animate-on-scroll"
+        action={`https://formspree.io/f/${siteConfig.formspreeId}`}
+        method="POST"
+      >
+        <h3>Schreiben Sie uns</h3>
+
+        <!-- Honeypot field for spam protection -->
+        <input type="text" name="_gotcha" class="form-honeypot" tabindex="-1" autocomplete="off">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Ihr vollständiger Name" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefon *</label>
+            <input type="tel" id="phone" name="phone" placeholder="Ihre Telefonnummer" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse">
+        </div>
+
+        <div class="form-group">
+          <label for="service">Gewünschte Behandlung</label>
+          <select id="service" name="service">
+            <option value="">Bitte wählen</option>
+            {siteConfig.services.map((service) => (
+              <option value={service.name}>{service.name}</option>
+            ))}
+            <option value="Sonstiges">Sonstiges</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Ihre Nachricht</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Beschreiben Sie kurz Ihr Anliegen. Bitte geben Sie hier keine sensiblen Gesundheitsdaten an."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-checkbox">
+            <input type="checkbox" name="privacy" required>
+            <span>Ich habe die <a href="/datenschutz" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</span>
+          </label>
+        </div>
+
+        <!-- Redirect after submission -->
+        <input type="hidden" name="_next" value={`${siteConfig.siteUrl}/danke`}>
+
+        <button type="submit" class="btn btn-accent form-submit">Anfrage absenden</button>
+
+        <p class="form-privacy">
+          Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    opacity: 0.15;
+  }
+
+  .contact-info h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--color-white);
+  }
+
+  .contact-info > p {
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .contact-detail svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-detail-text strong {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+
+  .contact-detail-text a {
+    color: var(--color-white);
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contact-detail-text span {
+    font-size: 1rem;
+  }
+
+  /* Form styling */
+  .contact-form {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .contact-form h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-white);
+  }
+
+  .contact-form .form-group label {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .contact-form .form-group input,
+  .contact-form .form-group textarea,
+  .contact-form .form-group select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+  }
+
+  .contact-form .form-group input::placeholder,
+  .contact-form .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .contact-form .form-group input:focus,
+  .contact-form .form-group textarea:focus,
+  .contact-form .form-group select:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(200, 149, 108, 0.2);
+  }
+
+  .contact-form .form-group select option {
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+  }
+
+  .contact-form .form-checkbox {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-form .form-checkbox a {
+    color: var(--color-white);
+    text-decoration: underline;
+  }
+
+  .form-submit {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .form-privacy {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

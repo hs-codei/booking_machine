@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../../site.config';
+---
+
+<BaseLayout
+  title={`Datenschutzerklärung — ${siteConfig.name}`}
+  description={`Datenschutzerklärung von ${siteConfig.name}. Informationen zur Verarbeitung Ihrer personenbezogenen Daten.`}
+>
+  <TopBar />
+  <Header />
+
+  <main>
+    <section class="legal-section section">
+      <div class="container">
+        <article class="legal-content">
+          <h1>Datenschutzerklärung</h1>
+
+          <div class="legal-notice">
+            <p>
+              <strong>Hinweis:</strong> Der folgende Text ist ein Platzhalter.
+              Bitte ersetzen Sie ihn mit der korrekten Datenschutzerklärung für Ihr Unternehmen.
+              Nutzen Sie einen Generator wie <a href="https://datenschutz-generator.de/" target="_blank" rel="noopener">datenschutz-generator.de</a>.
+            </p>
+          </div>
+
+          <h2>1. Datenschutz auf einen Blick</h2>
+
+          <h3>Allgemeine Hinweise</h3>
+          <p>
+            Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen
+            Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen
+            Sie persönlich identifiziert werden können.
+          </p>
+
+          <h3>Datenerfassung auf dieser Website</h3>
+          <p>
+            <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
+            Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten
+            können Sie dem Impressum dieser Website entnehmen.
+          </p>
+
+          <h2>2. Allgemeine Hinweise und Pflichtinformationen</h2>
+
+          <h3>Datenschutz</h3>
+          <p>
+            Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst.
+            Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen
+            Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+          </p>
+
+          <h3>Hinweis zur verantwortlichen Stelle</h3>
+          <p>
+            Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+          </p>
+          <p>
+            {siteConfig.name}<br>
+            {siteConfig.address.street}<br>
+            {siteConfig.address.postal} {siteConfig.address.city}<br><br>
+            Telefon: {siteConfig.phone}<br>
+            E-Mail: {siteConfig.email}
+          </p>
+
+          <h2>3. Datenerfassung auf dieser Website</h2>
+
+          <h3>Kontaktformular</h3>
+          <p>
+            Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem
+            Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung
+            der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben
+            wir nicht ohne Ihre Einwilligung weiter.
+          </p>
+          <p>
+            <strong>Wichtig:</strong> Bitte geben Sie im Kontaktformular keine sensiblen Gesundheitsdaten an.
+            Für medizinische Anliegen kontaktieren Sie uns bitte telefonisch oder persönlich.
+          </p>
+
+          <h3>Anfrage per E-Mail oder Telefon</h3>
+          <p>
+            Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus
+            hervorgehenden personenbezogenen Daten zum Zwecke der Bearbeitung Ihres Anliegens bei uns
+            gespeichert und verarbeitet.
+          </p>
+
+          <h2>4. Plugins und Tools</h2>
+
+          <h3>Google Fonts (lokales Hosting)</h3>
+          <p>
+            Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten Google Fonts.
+            Die Fonts werden über Google-Server geladen.
+          </p>
+
+          <h3>Calendly</h3>
+          <p>
+            Für die Online-Terminbuchung nutzen wir den Dienst Calendly. Bei Nutzung des
+            Buchungsformulars werden Ihre Daten an Calendly übermittelt. Weitere Informationen
+            finden Sie in der Datenschutzerklärung von Calendly.
+          </p>
+
+          <h3>Formspree</h3>
+          <p>
+            Für die Verarbeitung von Kontaktformular-Anfragen nutzen wir den Dienst Formspree.
+            Ihre Formulardaten werden an Formspree übermittelt und dort verarbeitet.
+          </p>
+
+          <h2>5. Ihre Rechte</h2>
+          <p>
+            Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung
+            Ihrer personenbezogenen Daten. Außerdem haben Sie das Recht, der Verarbeitung zu widersprechen
+            und Ihre Daten in einem strukturierten, gängigen Format zu erhalten (Datenübertragbarkeit).
+          </p>
+          <p>
+            Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt,
+            können Sie sich bei der zuständigen Aufsichtsbehörde beschweren.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .legal-content h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: var(--color-primary-dark);
+    margin-bottom: 2rem;
+  }
+
+  .legal-content h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--color-primary-dark);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content h3 {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-content p {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .legal-content a {
+    color: var(--color-primary);
+  }
+
+  .legal-notice {
+    background: var(--color-accent);
+    color: var(--color-white);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+  }
+
+  .legal-notice p {
+    color: var(--color-white);
+    margin: 0;
+  }
+
+  .legal-notice a {
+    color: var(--color-white);
+    text-decoration: underline;
+  }
+</style>

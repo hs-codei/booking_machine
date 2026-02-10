@@ -3,11 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TopBar from '../components/TopBar.astro';
 import Header from '../components/Header.astro';
 import MobileCTA from '../components/MobileCTA.astro';
-import Hero from '../components/Hero.astro';
-import SocialProof from '../components/SocialProof.astro';
-import Services from '../components/Services.astro';
-import About from '../components/About.astro';
-import Testimonials from '../components/Testimonials.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Map from '../components/Map.astro';
 import Footer from '../components/Footer.astro';
@@ -15,20 +10,15 @@ import { siteConfig } from '../../site.config';
 ---
 
 <BaseLayout
-  title={`${siteConfig.tagline} — ${siteConfig.name}`}
-  description={siteConfig.meta.defaultDescription}
+  title={`Kontakt — ${siteConfig.name}`}
+  description={`Kontaktieren Sie ${siteConfig.name} in ${siteConfig.address.district}. Telefon: ${siteConfig.phone}. ${siteConfig.address.street}, ${siteConfig.address.postal} ${siteConfig.address.city}.`}
 >
   <MobileCTA />
   <TopBar />
   <Header />
 
   <main>
-    <Hero />
-    <SocialProof />
-    <Services />
-    <About />
-    <Testimonials />
-    <ContactForm />
+    <ContactForm standalone={true} />
     <Map />
   </main>
 

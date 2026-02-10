@@ -1,0 +1,98 @@
+---
+import { siteConfig } from '../../site.config';
+
+const yearsOfExperience = new Date().getFullYear() - siteConfig.yearFounded;
+---
+
+<section class="about section section--alt" id="ueber-uns">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image animate-on-scroll">
+        <div class="about-image-wrapper">
+          <!-- Replace with actual image -->
+          <div class="placeholder">📷 Teamfoto (450×600px)</div>
+        </div>
+      </div>
+
+      <div class="about-content animate-on-scroll">
+        <div class="section-label">Über uns</div>
+        <h2 class="section-title">
+          Seit {siteConfig.yearFounded} in {siteConfig.address.district} — für Ihre Beweglichkeit
+        </h2>
+
+        <p>
+          Was als kleine Praxis an der {siteConfig.address.street.split(' ')[0]} begann, ist heute ein Team aus {siteConfig.teamSize} erfahrenen Therapeuten, die eines verbindet: die Überzeugung, dass gute Physiotherapie Zeit, Zuwendung und Fachkompetenz braucht.
+        </p>
+
+        <p>
+          Wir nehmen uns für jeden Patienten die Zeit, die nötig ist. Bei uns sind Sie kein Aktenzeichen, sondern ein Mensch mit individuellen Beschwerden und Zielen. Ob nach einer Operation, bei chronischen Schmerzen oder zur sportlichen Rehabilitation — wir begleiten Sie zurück in die Bewegung.
+        </p>
+
+        <p>
+          Alle Kassen und privat versicherte Patienten sind bei uns willkommen. Hausbesuche sind nach Absprache möglich.
+        </p>
+
+        <div class="about-credentials">
+          {siteConfig.credentials.map((credential) => (
+            <span class="credential-tag badge">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              {credential}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-image-wrapper {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: var(--color-border);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-content p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .about-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .credential-tag {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-image-wrapper {
+      aspect-ratio: 16/9;
+    }
+  }
+</style>

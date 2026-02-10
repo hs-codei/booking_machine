@@ -1,0 +1,65 @@
+---
+import { siteConfig } from '../../site.config';
+
+interface Props {
+  height?: string;
+}
+
+const { height = '700px' } = Astro.props;
+---
+
+<div class="calendly-embed">
+  <div class="calendly-inline-widget" data-url={siteConfig.calendlyUrl} style={`min-height: ${height};`}></div>
+
+  <div class="calendly-fallback">
+    <p>
+      Falls das Buchungsformular nicht angezeigt wird, können Sie uns auch direkt erreichen:
+    </p>
+    <div class="calendly-fallback-actions">
+      <a href={siteConfig.calendlyUrl} target="_blank" rel="noopener" class="btn btn-primary">
+        Termin auf Calendly buchen
+      </a>
+      <a href={`tel:${siteConfig.phoneTel}`} class="btn btn-secondary">
+        {siteConfig.phone}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Calendly Script -->
+<script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<style>
+  .calendly-embed {
+    position: relative;
+  }
+
+  .calendly-inline-widget {
+    width: 100%;
+  }
+
+  .calendly-fallback {
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-bg-alt);
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+  }
+
+  .calendly-fallback p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+  }
+
+  .calendly-fallback-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Hide fallback when Calendly loads */
+  .calendly-inline-widget:not(:empty) + .calendly-fallback {
+    display: none;
+  }
+</style>

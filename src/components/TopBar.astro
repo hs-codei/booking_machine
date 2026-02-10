@@ -1,0 +1,56 @@
+---
+import { siteConfig } from '../../site.config';
+---
+
+<div class="top-bar">
+  <div class="container">
+    <span class="top-bar-hours">{siteConfig.hours}</span>
+    <a href={`tel:${siteConfig.phoneTel}`}>✆ {siteConfig.phone}</a>
+  </div>
+</div>
+
+<style>
+  .top-bar {
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .top-bar a {
+    color: var(--color-white);
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .top-bar a:hover {
+    opacity: 0.85;
+  }
+
+  .top-bar-hours {
+    opacity: 0.85;
+  }
+
+  @media (max-width: 480px) {
+    .top-bar {
+      text-align: center;
+    }
+
+    .top-bar .container {
+      justify-content: center;
+    }
+
+    .top-bar-hours {
+      display: none;
+    }
+  }
+</style>

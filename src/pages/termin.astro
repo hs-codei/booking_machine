@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import MobileCTA from '../components/MobileCTA.astro';
+import CalendlyEmbed from '../components/CalendlyEmbed.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../../site.config';
+---
+
+<BaseLayout
+  title={`Termin buchen — ${siteConfig.name}`}
+  description={`Online Termin buchen bei ${siteConfig.name} in ${siteConfig.address.district}. ${siteConfig.tagline}. Schnell und einfach online reservieren.`}
+>
+  <MobileCTA />
+  <TopBar />
+  <Header />
+
+  <main>
+    <section class="booking-section section">
+      <div class="container">
+        <div class="booking-header text-center animate-on-scroll">
+          <h1>Termin buchen</h1>
+          <p class="booking-subtitle">
+            Wählen Sie Ihren Wunschtermin und buchen Sie direkt online.
+            Wir freuen uns auf Sie!
+          </p>
+        </div>
+
+        <div class="booking-embed animate-on-scroll">
+          <CalendlyEmbed height="700px" />
+        </div>
+
+        <div class="booking-alternative text-center animate-on-scroll">
+          <p>
+            <strong>Lieber persönlich?</strong>
+            Rufen Sie uns an unter
+            <a href={`tel:${siteConfig.phoneTel}`}>{siteConfig.phone}</a>
+            oder schreiben Sie uns eine
+            <a href="/kontakt">Nachricht</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .booking-section {
+    background: var(--color-bg);
+  }
+
+  .booking-header {
+    margin-bottom: 2rem;
+  }
+
+  .booking-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--color-primary-dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .booking-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .booking-embed {
+    margin-bottom: 2rem;
+  }
+
+  .booking-alternative {
+    padding: 1.5rem;
+    background: var(--color-bg-alt);
+    border-radius: var(--border-radius);
+  }
+
+  .booking-alternative p {
+    color: var(--color-text-light);
+    margin: 0;
+  }
+
+  .booking-alternative a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>

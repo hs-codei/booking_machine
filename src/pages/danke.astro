@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../../site.config';
+---
+
+<BaseLayout
+  title={`Vielen Dank — ${siteConfig.name}`}
+  description="Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen."
+  noindex={true}
+>
+  <TopBar />
+  <Header />
+
+  <main>
+    <section class="thank-you-section section">
+      <div class="container">
+        <div class="thank-you-content text-center animate-on-scroll">
+          <div class="thank-you-icon">✓</div>
+
+          <h1>Vielen Dank für Ihre Anfrage!</h1>
+
+          <p class="thank-you-message">
+            Wir haben Ihre Nachricht erhalten und melden uns in der Regel
+            <strong>innerhalb von 24 Stunden</strong> bei Ihnen zurück.
+          </p>
+
+          <div class="thank-you-next">
+            <p>In der Zwischenzeit können Sie:</p>
+            <ul>
+              <li>Direkt einen <a href="/termin">Online-Termin buchen</a></li>
+              <li>Uns anrufen unter <a href={`tel:${siteConfig.phoneTel}`}>{siteConfig.phone}</a></li>
+              <li>Mehr über unsere <a href="/#leistungen">Leistungen erfahren</a></li>
+            </ul>
+          </div>
+
+          <a href="/" class="btn btn-primary">Zurück zur Startseite</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .thank-you-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .thank-you-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .thank-you-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    animation: scaleIn 0.5s ease;
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .thank-you-content h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+  }
+
+  .thank-you-message {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+  }
+
+  .thank-you-next {
+    background: var(--color-bg-alt);
+    padding: 1.5rem 2rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .thank-you-next p {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .thank-you-next ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .thank-you-next li {
+    padding: 0.5rem 0;
+    color: var(--color-text-light);
+  }
+
+  .thank-you-next li::before {
+    content: '→ ';
+    color: var(--color-primary);
+  }
+
+  .thank-you-next a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>
