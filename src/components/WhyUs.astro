@@ -1,0 +1,109 @@
+---
+const reasons = [
+  {
+    icon: "clock",
+    title: "Schnelle Termine",
+    description: "Oft schon innerhalb weniger Tage. Bei akuten Schmerzen bemühen wir uns um kurzfristige Lösungen."
+  },
+  {
+    icon: "user",
+    title: "Individuelle Betreuung",
+    description: "Keine Massenabfertigung. Wir nehmen uns Zeit für eine gründliche Befundaufnahme und persönliche Behandlung."
+  },
+  {
+    icon: "certificate",
+    title: "Qualifiziertes Team",
+    description: "Alle Therapeuten mit staatlicher Anerkennung und regelmäßiger Fortbildung in modernen Behandlungsmethoden."
+  }
+];
+---
+
+<section class="why-us section" id="warum-wir">
+  <div class="container">
+    <div class="section-header text-center animate-on-scroll">
+      <div class="section-label">Warum zu uns?</div>
+      <h2 class="section-title">Was uns von anderen unterscheidet</h2>
+    </div>
+
+    <div class="reasons-grid">
+      {reasons.map((reason, index) => (
+        <div class="reason-card animate-on-scroll" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="reason-icon">
+            {reason.icon === "clock" && (
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+            )}
+            {reason.icon === "user" && (
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            )}
+            {reason.icon === "certificate" && (
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            )}
+          </div>
+          <h3>{reason.title}</h3>
+          <p>{reason.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-us {
+    background: var(--color-bg);
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .reason-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .reason-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+
+  .reason-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+  }
+
+  .reason-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .reason-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

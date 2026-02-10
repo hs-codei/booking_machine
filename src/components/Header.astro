@@ -8,13 +8,48 @@ import { siteConfig } from '../../site.config';
       {siteConfig.name}
       <span>{siteConfig.tagline}</span>
     </a>
-    <a href={`tel:${siteConfig.phoneTel}`} class="header-cta">
-      <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.1.31.03.66-.25 1.02l-2.2 2.2z"/></svg>
-      <span class="hide-mobile">Termin vereinbaren</span>
-      <span class="hide-desktop">Anrufen</span>
+
+    <nav class="main-nav">
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/#ueber-uns">Über uns</a>
+      <a href="/kontakt">Kontakt</a>
+    </nav>
+
+    <a href="/termin" class="header-cta">
+      <span>Termin buchen</span>
     </a>
+
+    <button class="mobile-menu-toggle" aria-label="Menü öffnen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
+
+  <nav class="mobile-nav">
+    <a href="/#leistungen">Leistungen</a>
+    <a href="/#ueber-uns">Über uns</a>
+    <a href="/kontakt">Kontakt</a>
+    <a href="/termin" class="btn btn-primary">Termin buchen</a>
+  </nav>
 </header>
+
+<script>
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  const header = document.querySelector('.header');
+
+  toggle?.addEventListener('click', () => {
+    header?.classList.toggle('mobile-open');
+  });
+
+  // Close menu when clicking a link
+  mobileNav?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      header?.classList.remove('mobile-open');
+    });
+  });
+</script>
 
 <style>
   .header {
@@ -31,6 +66,7 @@ import { siteConfig } from '../../site.config';
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    gap: 2rem;
   }
 
   .logo {
@@ -50,6 +86,25 @@ import { siteConfig } from '../../site.config';
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-top: 2px;
+  }
+
+  /* Main navigation */
+  .main-nav {
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+  }
+
+  .main-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color var(--transition-base);
+  }
+
+  .main-nav a:hover {
+    color: var(--color-primary);
   }
 
   .header-cta {
@@ -73,19 +128,72 @@ import { siteConfig } from '../../site.config';
     box-shadow: 0 4px 16px rgba(43, 95, 78, 0.3);
   }
 
-  .header-cta svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
+  /* Mobile menu toggle */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
   }
 
-  @media (max-width: 480px) {
-    .header-cta span.hide-mobile { display: none; }
-    .header-cta span.hide-desktop { display: inline; }
+  .mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    transition: all 0.3s ease;
   }
 
-  @media (min-width: 481px) {
-    .header-cta span.hide-mobile { display: inline; }
-    .header-cta span.hide-desktop { display: none; }
+  /* Mobile nav */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
+    padding: 1rem;
+  }
+
+  .mobile-nav a {
+    padding: 0.75rem 0;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-nav a:last-child {
+    border-bottom: none;
+    margin-top: 0.5rem;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .main-nav,
+    .header-cta {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    .header.mobile-open .mobile-nav {
+      display: flex;
+    }
+
+    .header.mobile-open .mobile-menu-toggle span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .header.mobile-open .mobile-menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .header.mobile-open .mobile-menu-toggle span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
   }
 </style>
