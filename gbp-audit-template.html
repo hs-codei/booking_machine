@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Business Profile Analyse</title>
+  <style>
+    /* Print-optimized styles */
+    @page {
+      size: A4;
+      margin: 1.5cm;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #2B5F4E;
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      color: #2B5F4E;
+      margin-bottom: 0.25rem;
+    }
+
+    .header .subtitle {
+      font-size: 1.1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .header .date {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    /* Editable fields - highlight in yellow for easy finding */
+    .editable {
+      background: #FFFDE7;
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+
+    @media print {
+      .editable {
+        background: transparent;
+      }
+    }
+
+    /* Section styles */
+    .section {
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2B5F4E;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 1rem;
+      background: #2B5F4E;
+      border-radius: 2px;
+    }
+
+    /* Checklist */
+    .checklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 1.5rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ccc;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .check-box.yes {
+      background: #2B5F4E;
+      border-color: #2B5F4E;
+      color: white;
+    }
+
+    .check-box.no {
+      background: #DC3545;
+      border-color: #DC3545;
+      color: white;
+    }
+
+    .check-box.partial {
+      background: #F59E0B;
+      border-color: #F59E0B;
+      color: white;
+    }
+
+    /* Quick wins */
+    .quick-wins {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .quick-win {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .quick-win:last-child {
+      margin-bottom: 0;
+    }
+
+    .quick-win::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #2B5F4E;
+      font-weight: bold;
+    }
+
+    .quick-win strong {
+      color: #2B5F4E;
+    }
+
+    /* Current status */
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+
+    .status-label {
+      color: #666;
+    }
+
+    .status-value {
+      font-weight: 600;
+    }
+
+    /* Competitor comparison */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .comparison-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .comparison-table .highlight {
+      background: #FEF3C7;
+    }
+
+    /* CTA section */
+    .cta-section {
+      background: #2B5F4E;
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .cta-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-section p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-section .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e5e5;
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+    }
+
+    /* Instructions (hidden on print) */
+    .instructions {
+      background: #EBF5FF;
+      border: 1px solid #93C5FD;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .instructions h4 {
+      color: #1E40AF;
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions ul {
+      margin-left: 1.25rem;
+      color: #1E40AF;
+    }
+
+    @media print {
+      .instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Instructions (visible on screen, hidden when printing) -->
+  <div class="instructions">
+    <h4>📝 Anleitung zum Ausfüllen:</h4>
+    <ul>
+      <li>Gelb markierte Felder (<span class="editable">so</span>) anpassen</li>
+      <li>Checkboxen: Klicke und ändere zu ✓ (yes), ✗ (no), oder ~ (partial)</li>
+      <li>Zum Drucken: Strg/Cmd + P → Als PDF speichern</li>
+    </ul>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Google Business Profile Analyse</h1>
+    <div class="subtitle">für <span class="editable" contenteditable="true">Praxis Musterfrau</span></div>
+    <div class="date">Erstellt am <span class="editable" contenteditable="true">10. Februar 2026</span></div>
+  </div>
+
+  <!-- Current Status -->
+  <div class="section">
+    <div class="section-title">Aktueller Status</div>
+    <div class="status-grid">
+      <div class="status-item">
+        <span class="status-label">Google-Bewertung:</span>
+        <span class="status-value editable" contenteditable="true">4.2 ★ (23 Bewertungen)</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Hauptkategorie:</span>
+        <span class="status-value editable" contenteditable="true">Physiotherapeut</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Fotos im Profil:</span>
+        <span class="status-value editable" contenteditable="true">5 Fotos</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Letzter Google-Post:</span>
+        <span class="status-value editable" contenteditable="true">Keiner</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checklist -->
+  <div class="section">
+    <div class="section-title">Profil-Check</div>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-box yes">✓</div>
+        <span>Adresse korrekt & vollständig</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box yes">✓</div>
+        <span>Telefonnummer eingetragen</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box yes">✓</div>
+        <span>Öffnungszeiten aktuell</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Website verlinkt</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Beschreibung mit Keywords</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Mindestens 10 Fotos</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Services-Bereich ausgefüllt</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Buchungslink hinzugefügt</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Regelmäßige Google-Posts</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box partial">~</div>
+        <span>Bewertungen beantwortet</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Q&A-Bereich genutzt</span>
+      </div>
+      <div class="check-item">
+        <div class="check-box no">✗</div>
+        <span>Attribute vollständig</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competitor Comparison -->
+  <div class="section">
+    <div class="section-title">Vergleich mit Wettbewerbern</div>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Praxis</th>
+          <th>Bewertungen</th>
+          <th>Fotos</th>
+          <th>Posts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><span class="editable" contenteditable="true">Praxis Musterfrau</span></td>
+          <td><span class="editable" contenteditable="true">23</span></td>
+          <td><span class="editable" contenteditable="true">5</span></td>
+          <td><span class="editable" contenteditable="true">0</span></td>
+        </tr>
+        <tr>
+          <td><span class="editable" contenteditable="true">Physio Am Park</span></td>
+          <td><span class="editable" contenteditable="true">67</span></td>
+          <td><span class="editable" contenteditable="true">18</span></td>
+          <td><span class="editable" contenteditable="true">12</span></td>
+        </tr>
+        <tr>
+          <td><span class="editable" contenteditable="true">Therapiezentrum West</span></td>
+          <td><span class="editable" contenteditable="true">45</span></td>
+          <td><span class="editable" contenteditable="true">22</span></td>
+          <td><span class="editable" contenteditable="true">8</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Quick Wins -->
+  <div class="section">
+    <div class="section-title">3 Quick Wins für sofortige Verbesserung</div>
+    <div class="quick-wins">
+      <div class="quick-win">
+        <strong>Fotos hochladen:</strong>
+        <span class="editable" contenteditable="true">Mit 5 Fotos liegen Sie deutlich unter dem Durchschnitt. Laden Sie mindestens 10-15 hochwertige Bilder hoch (Team, Praxis, Behandlungsräume). Profile mit mehr Fotos erhalten bis zu 35% mehr Klicks.</span>
+      </div>
+      <div class="quick-win">
+        <strong>Services eintragen:</strong>
+        <span class="editable" contenteditable="true">Der Services-Bereich ist leer. Tragen Sie alle Ihre Behandlungen ein (Manuelle Therapie, Krankengymnastik, etc.) — das verbessert Ihre Sichtbarkeit für spezifische Suchanfragen.</span>
+      </div>
+      <div class="quick-win">
+        <strong>Ersten Google-Post erstellen:</strong>
+        <span class="editable" contenteditable="true">Sie haben noch keinen Google-Post. Ein wöchentlicher Post (Gesundheitstipp, Neuigkeit) signalisiert Google Aktivität und erscheint direkt in Ihrem Profil.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="cta-section">
+    <h3>Möchten Sie Ihre Google-Sichtbarkeit verbessern?</h3>
+    <p>Ich helfe lokalen Praxen in Berlin, über Google mehr Patienten zu gewinnen.<br>Kostenfreies 15-Minuten-Gespräch — unverbindlich.</p>
+    <div class="contact-info">
+      <span>📞 <span class="editable" contenteditable="true">0176 12345678</span></span>
+      <span>📧 <span class="editable" contenteditable="true">ihre@email.de</span></span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span class="editable" contenteditable="true">Ihr Name</span> · Lokale Sichtbarkeit für Berliner Praxen · <span class="editable" contenteditable="true">www.ihre-website.de</span>
+  </div>
+
+</body>
+</html>
