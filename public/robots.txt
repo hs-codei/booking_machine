@@ -1,0 +1,11 @@
+# Robots.txt for Booking Machine Website
+# https://www.praxis-bewegungszeit.de
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.praxis-bewegungszeit.de/sitemap-index.xml
+
+# Block admin/internal paths (none for static site)
+# Disallow: /admin/

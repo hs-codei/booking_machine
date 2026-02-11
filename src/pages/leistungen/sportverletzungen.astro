@@ -38,6 +38,30 @@ const faqSchema = {
         "@type": "Answer",
         "text": "Wir behandeln alle gängigen Sportverletzungen: Muskelverletzungen (Zerrungen, Faserrisse), Sehnenprobleme (Achillessehne, Patellasehne), Bänderverletzungen, Meniskusprobleme, Schulterbeschwerden und Überlastungssyndrome wie Tennis-Ellenbogen oder Läuferknie."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert die Rehabilitation nach einer Sportverletzung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Dauer hängt von der Art der Verletzung ab. Leichte Muskelzerrungen erholen sich oft in 2-4 Wochen. Bänderrisse oder Sehnenprobleme benötigen 6-12 Wochen. Nach Operationen (z.B. Kreuzband) rechnen Sie mit 6-9 Monaten bis zur vollen Sportfähigkeit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich während der Rehabilitation weiter trainieren?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oft ja — aber angepasst. Wir zeigen Ihnen, welche Bewegungen und Übungen Sie weiterhin machen können, ohne die Heilung zu gefährden. Alternativtraining (z.B. Aquajogging bei Laufverletzungen) hilft, die Fitness zu erhalten."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bieten Sie auch Präventionstraining an?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, Prävention ist ein wichtiger Teil unserer Arbeit. Wir analysieren Ihre Bewegungsmuster und erstellen individuelle Übungsprogramme zur Verletzungsvorbeugung — besonders sinnvoll für Wettkampfsportler und nach überstandenen Verletzungen."
+      }
     }
   ]
 };
@@ -188,6 +212,25 @@ const faqSchema = {
               <p>{faq.acceptedAnswer.text}</p>
             </details>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Services -->
+    <section class="related-services section section--alt">
+      <div class="container">
+        <h2 class="section-title text-center">Weitere Leistungen</h2>
+        <div class="related-cards">
+          <a href="/leistungen/rueckenschmerzen" class="related-card">
+            <h3>Rückenschmerzen</h3>
+            <p>Effektive Behandlung von akuten und chronischen Rückenproblemen mit manueller Therapie und Krankengymnastik.</p>
+            <span class="related-link">Mehr erfahren →</span>
+          </a>
+          <a href="/#leistungen" class="related-card">
+            <h3>Alle Leistungen</h3>
+            <p>Entdecken Sie unser komplettes Behandlungsspektrum — von manueller Therapie bis zur Lymphdrainage.</p>
+            <span class="related-link">Übersicht ansehen →</span>
+          </a>
         </div>
       </div>
     </section>
@@ -438,6 +481,50 @@ const faqSchema = {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  /* Related Services */
+  .related-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .related-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .related-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .related-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .related-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .related-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary);
   }
 
   @media (max-width: 900px) {

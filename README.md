@@ -1,43 +1,111 @@
-# Astro Starter Kit: Minimal
+# Booking Machine — Praxis Bewegungszeit
 
-```sh
-npm create astro@latest -- --template minimal
+A conversion-optimized website for local wellness businesses. Built with Astro for maximum performance and SEO.
+
+## Live Site
+
+**Production:** [lovely-taffy-ccfaf3.netlify.app](https://lovely-taffy-ccfaf3.netlify.app)
+
+## Features
+
+- **Performance:** Static HTML, CSS-only animations, 90+ PageSpeed score
+- **SEO:** Schema.org markup, auto-generated sitemap, optimized meta tags
+- **Conversion:** Mobile CTA bar, Doctolib booking integration, prominent phone CTAs
+- **Compliance:** TDDDG §25 click-to-load for Google Maps, GDPR-ready privacy policy
+- **Responsive:** Mobile-first design with smooth animations
+
+## Tech Stack
+
+- **Framework:** [Astro](https://astro.build) (static site generator)
+- **Styling:** CSS with custom properties
+- **Booking:** Doctolib (external redirect)
+- **Forms:** Formspree
+- **Hosting:** Netlify
+
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server (localhost:4321)
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Project Structure
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
+```
+websites/
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/       # Reusable UI components
+│   ├── layouts/          # Page layouts (BaseLayout.astro)
+│   ├── pages/            # Route-based pages
+│   │   └── leistungen/   # SEO money pages
+│   └── styles/           # Global CSS
+├── public/               # Static assets (images, favicon, robots.txt)
+├── docs/                 # Sales materials (GBP audit template)
+├── site.config.ts        # All client-specific data
+├── netlify.toml          # Netlify deployment config
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Configuration
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+All client-specific data lives in `site.config.ts`:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- Business name, tagline, contact info
+- Address and opening hours
+- External service URLs (Doctolib, Formspree, Google Maps)
+- Brand colors
+- Services and testimonials
 
-## 🧞 Commands
+## Pages
 
-All commands are run from the root of the project, from a terminal:
+| Route | Purpose |
+|-------|---------|
+| `/` | Home — conversion landing page |
+| `/termin` | Booking — Doctolib redirect |
+| `/kontakt` | Contact form + map |
+| `/danke` | Thank you (post-form) |
+| `/leistungen/rueckenschmerzen` | SEO money page |
+| `/leistungen/sportverletzungen` | SEO money page |
+| `/impressum` | Legal notice (DDG §5) |
+| `/datenschutz` | Privacy policy (GDPR) |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Deployment
 
-## 👀 Want to learn more?
+### Netlify (Recommended)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. Push to GitHub
+2. Connect repo to Netlify
+3. Netlify auto-detects Astro and deploys
+
+**Or drag-and-drop:**
+1. Run `npm run build`
+2. Drag `dist/` folder to [Netlify Drop](https://app.netlify.com/drop)
+
+### Custom Domain
+
+1. Add domain in Netlify dashboard
+2. Update DNS records per Netlify instructions
+3. Update `robots.txt` and `site.config.ts` with new domain
+
+## Cloning for New Client
+
+1. Duplicate this folder
+2. Edit `site.config.ts` with new client data
+3. Replace images in `public/images/`
+4. Create Formspree form → add ID to config
+5. Get client's Doctolib URL → add to config
+6. Get Google Maps embed URL → add to config
+7. Deploy to new Netlify site
+
+## License
+
+Private — not for redistribution.

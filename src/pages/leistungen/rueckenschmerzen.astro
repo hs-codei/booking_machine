@@ -38,6 +38,30 @@ const faqSchema = {
         "@type": "Answer",
         "text": "Je nach Ursache setzen wir manuelle Therapie, Krankengymnastik, Wärmetherapie und gezielte Übungen ein. Bei muskulären Verspannungen hilft oft die Kombination aus manueller Behandlung und aktiven Übungen am besten."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert eine Behandlungssitzung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Eine Standardbehandlung dauert 20 Minuten. Bei Bedarf können auch längere Einheiten (40 oder 60 Minuten) verordnet werden. Die Erstbefundung nimmt in der Regel etwas mehr Zeit in Anspruch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich einen Termin absagen oder verschieben?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, bitte sagen Sie mindestens 24 Stunden vorher ab. So können wir den Termin an andere Patienten vergeben. Bei kurzfristigen Absagen ohne triftigen Grund behalten wir uns vor, eine Ausfallgebühr zu berechnen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Gibt es Parkmöglichkeiten in der Nähe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In der näheren Umgebung finden Sie Parkmöglichkeiten auf der Straße (Parkzone). Alternativ ist die Praxis gut mit öffentlichen Verkehrsmitteln erreichbar."
+      }
     }
   ]
 };
@@ -170,6 +194,25 @@ const faqSchema = {
               <p>{faq.acceptedAnswer.text}</p>
             </details>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Services -->
+    <section class="related-services section section--alt">
+      <div class="container">
+        <h2 class="section-title text-center">Weitere Leistungen</h2>
+        <div class="related-cards">
+          <a href="/leistungen/sportverletzungen" class="related-card">
+            <h3>Sportverletzungen</h3>
+            <p>Schnelle Rehabilitation nach Sportverletzungen — von Zerrungen bis Bänderrissen. Zurück zum Training.</p>
+            <span class="related-link">Mehr erfahren →</span>
+          </a>
+          <a href="/#leistungen" class="related-card">
+            <h3>Alle Leistungen</h3>
+            <p>Entdecken Sie unser komplettes Behandlungsspektrum — von manueller Therapie bis zur Lymphdrainage.</p>
+            <span class="related-link">Übersicht ansehen →</span>
+          </a>
         </div>
       </div>
     </section>
@@ -420,6 +463,50 @@ const faqSchema = {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  /* Related Services */
+  .related-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .related-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .related-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .related-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .related-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .related-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary);
   }
 
   @media (max-width: 900px) {
