@@ -35,8 +35,8 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Custom 404 page
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+# Custom 404 page (uncomment when 404.astro exists)
+# [[redirects]]
+#   from = "/*"
+#   to = "/404.html"
+#   status = 404
